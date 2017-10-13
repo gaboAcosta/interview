@@ -1,0 +1,6 @@
+{
+  "verbose": true,
+  "ignore": ["client/*", "dist/*"],
+  "watch": "./server",
+  "extensions": ["js", "html", "yaml"]
+}

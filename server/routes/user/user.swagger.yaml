@@ -1,0 +1,29 @@
+paths:
+  /user:
+    get:
+      tags:
+      - "user"
+      summary: "Gets a list of users"
+      description: "List all users"
+      operationId: "listUser"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        500:
+          description: "Internal error"
+tags:
+- name: "user"
+  description: "Operations about user"
+  externalDocs:
+    description: "Find out more about our store"
+    url: "http://localhost"
+definitions:
+  User:
+    type: "object"
+    properties:
+      firstName:
+        type: "string"
