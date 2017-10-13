@@ -1,27 +1,26 @@
 
+const gUtil = require('gulp-util')
 const chalk = require('chalk')
 const Glob = require('glob');
 const YAML = require('yamljs');
 const path = require('path')
 const fs = require('fs')
-const baseDockPath = path.resolve(path.join(__dirname, '../base.swagger.yaml'))
+const baseDockPath = path.resolve(path.join(__dirname, '../server/base.swagger.yaml'))
 const baseDoc = YAML.load(baseDockPath);
 
-module.exports = (done) => {
-    baseDoc.paths = {}
-    baseDoc.definitions = {}
-    baseDoc.tags = []
+module.exports = (gulp) => {
+    gulp.task('swagger', () => {
+        baseDoc.paths = {}
+        baseDoc.definitions = {}
+        baseDoc.tags = []
 
-    Glob.sync('../routes/**/*.swagger.yaml', {
-        realpath: true,
-        cwd: __dirname,
-    })
+        Glob.sync('../server/routes/**/*.swagger.yaml', {
+            realpath: true,
+            cwd: __dirname,
+        })
         .forEach((file) => {
 
-            console.log('processing yaml file')
-            console.log(file)
             const routeObj = YAML.load(file)
-            console.log(routeObj)
             const { paths } = routeObj || {}
             const { definitions } = routeObj || {}
             const { tags } = routeObj || []
@@ -39,8 +38,9 @@ module.exports = (done) => {
 
         })
 
-    const swaggerFilePath = path.resolve(path.join(__dirname, '../../dist/swagger.yaml'))
+        const swaggerFilePath = path.resolve(path.join(__dirname, '../dist/swagger.yaml'))
 
-    fs.writeFileSync(swaggerFilePath, YAML.stringify(baseDoc))
-    console.log(chalk.cyan('Swagger file successfully generated'));
+        fs.writeFileSync(swaggerFilePath, YAML.stringify(baseDoc, 10))
+        gUtil.log(chalk.cyan('Swagger file successfully generated'));
+    })
 }

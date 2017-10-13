@@ -1,11 +1,11 @@
+
 const express = require('express')
+const gUtil = require('gulp-util')
+const chalk = require('chalk')
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const path = require('path');
-const swaggerGenerator = require('./util/swagger')
-const routeGenerator = require('./util/routes')
-
-swaggerGenerator()
+const router = require('./routes')
 
 const swaggerPath = path.resolve(path.join(__dirname, '../dist/swagger.yaml'))
 let swaggerDocument
@@ -20,8 +20,8 @@ try {
 const app = express()
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-routeGenerator(app)
+router(app)
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+    gUtil.log(chalk.cyan('App listening on port 3000'));
 })

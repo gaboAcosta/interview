@@ -1,4 +1,5 @@
 
+const gUtil = require('gulp-util')
 const chalk = require('chalk')
 const Glob = require('glob');
 const YAML = require('yamljs');
@@ -12,6 +13,8 @@ module.exports = (app) => {
     baseDoc.definitions = {}
     baseDoc.tags = []
 
+    gUtil.log(chalk.cyan('Loading routes'));
+
     Glob.sync('../routes/**/*.route.js', {
         realpath: true,
         cwd: __dirname,
@@ -22,5 +25,5 @@ module.exports = (app) => {
 
     })
 
-    console.log(chalk.cyan('Routes correctly loaded'));
+    gUtil.log(chalk.cyan('Routes Loaded'));
 }
