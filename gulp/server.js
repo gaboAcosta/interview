@@ -8,7 +8,8 @@ module.exports = (gulp) => {
             ext: 'js html yaml',
             env: { 'NODE_ENV': 'development' },
             exclude: 'client',
-            verbose: true
+            verbose: true,
+            nodeArgs: ['--debug']
         })
     })
 }

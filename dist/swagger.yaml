@@ -28,7 +28,7 @@ definitions:
     User:
         type: object
         properties:
-            firstName:
+            name:
                 type: string
 tags:
     -

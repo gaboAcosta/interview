@@ -6,6 +6,10 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const path = require('path');
 const router = require('./routes')
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/unosquare', { useMongoClient: true });
+mongoose.Promise = global.Promise;
 
 const swaggerPath = path.resolve(path.join(__dirname, '../dist/swagger.yaml'))
 let swaggerDocument
