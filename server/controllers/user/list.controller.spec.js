@@ -47,13 +47,13 @@ describe('List User Controller', ()=>{
 
             expect(error).to.be.undefined()
             expect(UserModel.find.calledWith({})).to.be.true()
-            expect(send.calledWith({ users: mockUserList })).to.be.true()
+            expect(send.calledWith({ mockUserList  })).to.be.true()
             expect(status.calledWith(200)).to.be.true()
 
             done()
         }
 
-        SUT(mockRequest, { send, status}, callback)
+        SUT(mockRequest, { send, status }, callback)
     });
 
     it('It returns a 500 response when something goes wrong', (done) => {

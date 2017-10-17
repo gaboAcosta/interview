@@ -1,12 +1,18 @@
 
 import React from 'react'
 import ReactDom from 'react-dom'
-import Hello from './components/Hello.js'
+import Routes from './components/main/Routes'
+import { Provider } from 'mobx-react'
+import GetStores from './stores'
+
+const stores = GetStores()
 
 class Index extends React.Component {
     render() {
         return(
-            <Hello/>
+            <Provider {...stores}>
+                <Routes />
+            </Provider>
         )
     }
 }
