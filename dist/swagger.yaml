@@ -8,6 +8,22 @@ basePath: /api/v1
 schemes:
     - http
 paths:
+    /movies:
+        get:
+            tags:
+                - movies
+            summary: 'Gets a list of movies'
+            description: 'List movies'
+            operationId: listMovies
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: 'successful operation'
+                    schema:
+                        $ref: '#/definitions/MovieList'
+                '500':
+                    description: 'Internal error'
     /user:
         get:
             tags:
@@ -25,12 +41,38 @@ paths:
                 '500':
                     description: 'Internal error'
 definitions:
+    MovieList:
+        type: object
+        properties:
+            page:
+                type: integer
+            total_results:
+                type: integer
+            total_pages:
+                type: integer
+            results:
+                type: array
+                items:
+                    type: object
+                    properties:
+                        title:
+                            type: string
+                        poster:
+                            type: string
+                        release:
+                            type: string
     User:
         type: object
         properties:
             name:
                 type: string
 tags:
+    -
+        name: movies
+        description: 'Endpoints for movies'
+        externalDocs:
+            description: 'This endpoint comes from themoviedb.org'
+            url: 'http://localhost'
     -
         name: user
         description: 'Operations about user'
