@@ -45,12 +45,15 @@ describe('List User Controller', ()=>{
 
         const callback = (error) => {
 
-            expect(error).to.be.undefined()
-            expect(UserModel.find.calledWith({})).to.be.true()
-            expect(send.calledWith({ mockUserList  })).to.be.true()
-            expect(status.calledWith(200)).to.be.true()
-
-            done()
+           try {
+               expect(error).to.be.undefined()
+               expect(UserModel.find.calledWith({})).to.be.true()
+               expect(send.calledWith(mockUserList)).to.be.true()
+               expect(status.calledWith(200)).to.be.true()
+               done()
+           } catch(ex){
+               done(ex)
+           }
         }
 
         SUT(mockRequest, { send, status }, callback)
