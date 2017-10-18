@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "concurrently  \"yarn run dev:client\" \"yarn run dev:server\"",
     "dev:client": "webpack-dev-server --config client/webpack.config.js --progress --colors --hot",
-    "test:client": "jest",
+    "test:unit:client": "jest",
     "dev:server": "nodemon server/index.js",
-    "test:server": "NODE_ENV=test lab -P 'spec' server"
+    "test:unit:server": "NODE_ENV=test lab -P 'spec' server",
+    "test:integration:server": "NODE_ENV=test lab -P 'spec' test/integration"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -25,6 +26,7 @@
     "jest": "^21.2.1",
     "lab": "^14.3.1",
     "mongoose-mock": "^0.4.0",
+    "nock": "^9.0.22",
     "nodemon": "^1.12.1",
     "proxyquire": "^1.8.0",
     "raf": "^3.4.0",
@@ -42,6 +44,7 @@
     "gulp-import-tasks": "^0.1.1",
     "gulp-util": "^3.0.8",
     "history": "^4.7.2",
+    "lodash": "^4.17.4",
     "mobx": "^3.3.1",
     "mobx-react": "^4.3.3",
     "mongoose": "^4.12.2",
@@ -66,6 +69,7 @@
       "/node_modules/",
       "/server/",
       "/gulp/",
+      "/test/",
       "/dist/"
     ],
     "setupFiles": [

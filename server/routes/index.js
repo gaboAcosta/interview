@@ -13,8 +13,6 @@ module.exports = (app) => {
     baseDoc.definitions = {}
     baseDoc.tags = []
 
-    gUtil.log(chalk.cyan('Loading routes'));
-
     Glob.sync('../routes/**/*.route.js', {
         realpath: true,
         cwd: __dirname,
@@ -25,5 +23,4 @@ module.exports = (app) => {
 
     })
 
-    gUtil.log(chalk.cyan('Routes Loaded'));
 }

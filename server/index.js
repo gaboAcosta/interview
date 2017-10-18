@@ -1,15 +1,10 @@
 
-const express = require('express')
 const gUtil = require('gulp-util')
 const chalk = require('chalk')
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const path = require('path');
-const router = require('./routes')
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/unosquare', { useMongoClient: true });
-mongoose.Promise = global.Promise;
+const serverFactory = require('./util/server.factory')
 
 const swaggerPath = path.resolve(path.join(__dirname, '../dist/swagger.yaml'))
 let swaggerDocument
@@ -21,10 +16,9 @@ try {
 
 }
 
-const app = express()
+const app = serverFactory()
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-router(app)
 
 app.listen(3000, function () {
     gUtil.log(chalk.cyan('App listening on port 3000'));
