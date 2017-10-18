@@ -24,7 +24,7 @@ module.exports = {
         },
         proxy: {
             '/api': {
-                target: 'http://gateway:3000',
+                target: 'http://localhost:3000',
                 secure: false
             }
         },
