@@ -6,8 +6,10 @@ const mongoose = require('mongoose');
 const env = process.env.NODE_ENV || 'develop'
 
 module.exports = () => {
-    const dbName = env === 'test' ? 'unosquare-test' : 'unosquare'
-    const db = mongoose.connect(`mongodb://localhost/${dbName}`, { useMongoClient: true }, (error) => {
+    const testDb = 'mongodb://<dbuser>:<dbpassword>@ds111336.mlab.com:11336/unosquare-test'
+    const db = 'mongodb://unosquare:unosquare@ds113046.mlab.com:13046/unosquare'
+    const dbName = env === 'test' ? testDb : db
+    mongoose.connect(dbName , { useMongoClient: true }, (error) => {
         if(error){
             throw error
         }
